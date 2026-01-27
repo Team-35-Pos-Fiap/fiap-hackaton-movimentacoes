@@ -5,10 +5,11 @@ import br.com.fiap.movimentacao_service.entities.record.response.MovimentacaoRec
 import br.com.fiap.movimentacao_service.entities.record.response.MovimentacaoRecordResponse;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public interface IMovimentacaoService {
-    MovimentacaoRecordResponse movimentar(String internalKey, MovimentacaoRecordRequest dados);
+    List<MovimentacaoRecordResponse> movimentar(MovimentacaoRecordRequest dados);
     MovimentacaoRecordPaginacaoResponse buscar(
         UUID idUnidade,
         UUID idInsumo,

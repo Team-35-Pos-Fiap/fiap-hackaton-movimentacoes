@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -48,9 +49,9 @@ public class MovimentacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<MovimentacaoRecordResponse> movimentacao(@RequestHeader("X-INTERNAL-KEY") String internalKey, @RequestBody @Valid MovimentacaoRecordRequest dadosMovimentacao) {
-        log.info("movimentacao(): chave interna {} e dados da movimentação {}", internalKey, dadosMovimentacao);
+    public ResponseEntity<List<MovimentacaoRecordResponse>> movimentacao(@RequestBody @Valid MovimentacaoRecordRequest dadosMovimentacao) {
+        log.info("movimentacao(): dados da movimentação {}", dadosMovimentacao);
 
-        return ResponseEntity.ok().body(movimentacaoService.movimentar(internalKey, dadosMovimentacao));
+        return ResponseEntity.ok().body(movimentacaoService.movimentar(dadosMovimentacao));
     }
 }

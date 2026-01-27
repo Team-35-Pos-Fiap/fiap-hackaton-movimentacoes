@@ -13,29 +13,29 @@ public class MovimentacaoDomain {
     private final UUID id;
     private final TipoMovimentacao tipoMovimentacao;
     private final UUID idInsumo;
-    private final UUID idUnidadeOrigem;
-    private final UUID idUnidadeDestino;
+    private final UUID idUnidade;
+    private final UUID idTransferencia;
     private final int quantidade;
     private final LocalDateTime timestamp;
 
     public MovimentacaoDomain(UUID id,
                               TipoMovimentacao tipoMovimentacao,
                               UUID idInsumo,
-                              UUID idUnidadeOrigem,
-                              UUID idUnidadeDestino,
+                              UUID idUnidade,
+                              UUID idTransferencia,
                               int quantidade,
                               LocalDateTime timestamp) {
         if (quantidade <= 0) {
             throw new QuantidadeMenorQueZeroException("Quantidade deve ser maior que zero");
         }
 
-        if (tipoMovimentacao == TipoMovimentacao.TRANSFERENCIA && idUnidadeDestino == null) {
-            throw new TransferenciaSemIdDestinoException("Transferência exige unidade destino");
-        }
-
-        if (tipoMovimentacao != TipoMovimentacao.TRANSFERENCIA && idUnidadeDestino != null) {
-            throw new IdDestinoDesnecessarioException("Unidade destino só é permitida em transferências");
-        }
+//        if (tipoMovimentacao == TipoMovimentacao.TRANSFERENCIA && idTransferencia == null) {
+//            throw new TransferenciaSemIdDestinoException("Transferência exige id da transferencia");
+//        }
+//
+//        if (tipoMovimentacao != TipoMovimentacao.TRANSFERENCIA && idTransferencia != null) {
+//            throw new IdDestinoDesnecessarioException("Id da transferencia só é permitido em transferências");
+//        }
 
         if (timestamp == null) {
             throw new TimestampFaltandoException("Timestamp não pode ser nulo");
@@ -44,8 +44,8 @@ public class MovimentacaoDomain {
         this.id = id;
         this.tipoMovimentacao = tipoMovimentacao;
         this.idInsumo = idInsumo;
-        this.idUnidadeOrigem = idUnidadeOrigem;
-        this.idUnidadeDestino = idUnidadeDestino;
+        this.idUnidade = idUnidade;
+        this.idTransferencia = idTransferencia;
         this.quantidade = quantidade;
         this.timestamp = timestamp;
     }
@@ -53,22 +53,22 @@ public class MovimentacaoDomain {
     public MovimentacaoDomain(UUID id,
                               TipoMovimentacao tipoMovimentacao,
                               UUID idInsumo,
-                              UUID idUnidadeOrigem,
-                              UUID idUnidadeDestino,
+                              UUID idUnidade,
+                              UUID idTransferencia,
                               int quantidade) {
-        this(id, tipoMovimentacao, idInsumo, idUnidadeOrigem, idUnidadeDestino, quantidade, LocalDateTime.now());
+        this(id, tipoMovimentacao, idInsumo, idUnidade, idTransferencia, quantidade, LocalDateTime.now());
     }
 
     public MovimentacaoDomain(UUID id,
                               TipoMovimentacao tipoMovimentacao,
                               UUID idInsumo,
-                              UUID idUnidadeOrigem,
+                              UUID idUnidade,
                               int quantidade) {
-        this(id, tipoMovimentacao, idInsumo, idUnidadeOrigem, null, quantidade, LocalDateTime.now());
+        this(id, tipoMovimentacao, idInsumo, idUnidade, null, quantidade, LocalDateTime.now());
     }
 
-    public static MovimentacaoDomain transferencia(UUID idInsumo, UUID origem, UUID destino, int quantidade) {
-        return new MovimentacaoDomain(null, TipoMovimentacao.TRANSFERENCIA, idInsumo, origem, destino, quantidade);
+    public static MovimentacaoDomain transferencia(UUID idInsumo, UUID origem, UUID idTransferencia,TipoMovimentacao tipoMovimentacao, int quantidade) {
+        return new MovimentacaoDomain(null, tipoMovimentacao, idInsumo, origem, idTransferencia, quantidade);
     }
 
     public static MovimentacaoDomain movimentacaoSimples(UUID idInsumo, UUID origem, TipoMovimentacao tipo, int quantidade) {

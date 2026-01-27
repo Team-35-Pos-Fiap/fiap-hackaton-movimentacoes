@@ -9,24 +9,24 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public interface IMovimentacaoJpaRepository extends JpaRepository<MovimentacaoModel, UUID> {
-    Page<MovimentacaoModel> findAllByIdUnidadeOrigem(
+    Page<MovimentacaoModel> findAllByIdUnidade(
         UUID idUnidadeOrigem,
         Pageable pageable
     );
 
-    Page<MovimentacaoModel> findByIdUnidadeOrigemAndTimestampBetween(
+    Page<MovimentacaoModel> findByIdUnidadeAndTimestampBetween(
         UUID idUnidade,
         LocalDateTime inicio,
         LocalDateTime fim, Pageable pageable
     );
 
-    Page<MovimentacaoModel> findByIdUnidadeOrigemAndIdInsumo(
+    Page<MovimentacaoModel> findByIdUnidadeAndIdInsumo(
         UUID idUnidade,
         UUID idInsumo,
         Pageable pageable
     );
 
-    Page<MovimentacaoModel> findByIdUnidadeOrigemAndIdInsumoAndTimestampBetween(
+    Page<MovimentacaoModel> findByIdUnidadeAndIdInsumoAndTimestampBetween(
         UUID idUnidade,
         UUID idInsumo,
         LocalDateTime inicio,

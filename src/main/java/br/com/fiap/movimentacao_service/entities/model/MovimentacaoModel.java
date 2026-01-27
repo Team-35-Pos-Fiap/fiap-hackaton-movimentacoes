@@ -24,10 +24,10 @@ public class MovimentacaoModel {
     private TipoMovimentacao tipoMovimentacao;
     @Column(nullable = false, name = "id_insumo")
     private UUID idInsumo;
-    @Column(nullable = false, name = "id_unidade_origem")
-    private UUID idUnidadeOrigem;
-    @Column(name = "id_unidade_destino")
-    private UUID idUnidadeDestino;
+    @Column(nullable = false, name = "id_unidade")
+    private UUID idUnidade;
+    @Column(name = "id_transferencia")
+    private UUID idTransferencia;
     @Column(nullable = false)
     private Integer quantidade;
     @Column(nullable = false, updatable = false)

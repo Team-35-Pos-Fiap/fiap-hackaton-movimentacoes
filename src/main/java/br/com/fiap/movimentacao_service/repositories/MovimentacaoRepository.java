@@ -1,7 +1,6 @@
 package br.com.fiap.movimentacao_service.repositories;
 
 import br.com.fiap.movimentacao_service.entities.model.MovimentacaoModel;
-import br.com.fiap.movimentacao_service.exceptions.PaginaInvalidaException;
 import br.com.fiap.movimentacao_service.repositories.iterfaces.IMovimentacaoRepository;
 import br.com.fiap.movimentacao_service.repositories.iterfaces.jpa.IMovimentacaoJpaRepository;
 import org.springframework.data.domain.Page;
@@ -29,24 +28,24 @@ public class MovimentacaoRepository implements IMovimentacaoRepository {
     @Override
     public Page<MovimentacaoModel> buscarPorUnidade(UUID idUnidade, Integer pagina) {
 
-        return movimentacaoRepository.findAllByIdUnidadeOrigem(idUnidade, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
+        return movimentacaoRepository.findAllByIdUnidade(idUnidade, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
     }
 
     @Override
     public Page<MovimentacaoModel> buscarPorUnidadeInsumoEPeriodo(UUID idUnidade, UUID idInsumo, LocalDateTime dataInicio, LocalDateTime dataFim, Integer pagina) {
 
-        return movimentacaoRepository.findByIdUnidadeOrigemAndIdInsumoAndTimestampBetween(idUnidade, idInsumo, dataInicio, dataFim, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
+        return movimentacaoRepository.findByIdUnidadeAndIdInsumoAndTimestampBetween(idUnidade, idInsumo, dataInicio, dataFim, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
     }
 
     @Override
     public Page<MovimentacaoModel> buscarPorUnidadeEInsumo(UUID idUnidade, UUID idInsumo, Integer pagina) {
 
-        return movimentacaoRepository.findByIdUnidadeOrigemAndIdInsumo(idUnidade, idInsumo, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
+        return movimentacaoRepository.findByIdUnidadeAndIdInsumo(idUnidade, idInsumo, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
     }
 
     @Override
     public Page<MovimentacaoModel> buscarPorUnidadeEPeriodo(UUID idUnidade, LocalDateTime dataInicio, LocalDateTime dataFim, Integer pagina) {
 
-        return movimentacaoRepository.findByIdUnidadeOrigemAndTimestampBetween(idUnidade, dataInicio, dataFim, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
+        return movimentacaoRepository.findByIdUnidadeAndTimestampBetween(idUnidade, dataInicio, dataFim, PageRequest.of(pagina - 1, QUANTIDADE_REGISTROS));
     }
 }

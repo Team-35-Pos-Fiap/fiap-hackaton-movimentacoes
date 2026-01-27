@@ -12,20 +12,13 @@ import java.util.List;
 
 public class MovimentacaoMapper {
 
-    public static MovimentacaoDomain fromRecordToDomain(MovimentacaoRecordRequest dados) {
-        return switch (dados.tipoMovimentacao()){
-            case TRANSFERENCIA -> MovimentacaoDomain.transferencia(dados.idInsumo(), dados.idUnidadeOrigem(), dados.idUnidadeDestino(), dados.quantidade());
-            case ENTRADA, SAIDA, PERDA -> MovimentacaoDomain.movimentacaoSimples(dados.idInsumo(), dados.idUnidadeOrigem(), dados.tipoMovimentacao(),dados.quantidade());
-        };
-    }
-
     public static MovimentacaoModel fromDomainToModel(MovimentacaoDomain dados) {
         return new MovimentacaoModel(
             null,
             dados.getTipoMovimentacao(),
             dados.getIdInsumo(),
-            dados.getIdUnidadeOrigem(),
-            dados.getIdUnidadeDestino(),
+            dados.getIdUnidade(),
+            dados.getIdTransferencia(),
             dados.getQuantidade(),
             dados.getTimestamp()
         );
@@ -36,8 +29,8 @@ public class MovimentacaoMapper {
             dados.getId(),
             dados.getTipoMovimentacao(),
             dados.getIdInsumo(),
-            dados.getIdUnidadeOrigem(),
-            dados.getIdUnidadeDestino(),
+            dados.getIdUnidade(),
+            dados.getIdTransferencia(),
             dados.getQuantidade(),
             dados.getTimestamp()
         );
@@ -48,8 +41,8 @@ public class MovimentacaoMapper {
             dados.getId(),
             dados.getTipoMovimentacao(),
             dados.getIdInsumo(),
-            dados.getIdUnidadeOrigem(),
-            dados.getIdUnidadeDestino(),
+            dados.getIdUnidade(),
+            dados.getIdTransferencia(),
             dados.getQuantidade(),
             dados.getTimestamp()
         );
@@ -60,8 +53,8 @@ public class MovimentacaoMapper {
             dados.getId(),
             dados.getTipoMovimentacao(),
             dados.getIdInsumo(),
-            dados.getIdUnidadeOrigem(),
-            dados.getIdUnidadeDestino(),
+            dados.getIdUnidade(),
+            dados.getIdTransferencia(),
             dados.getQuantidade(),
             dados.getTimestamp()
         );

@@ -12,8 +12,8 @@ public record MovimentacaoRecordResponse(
     UUID id,
     TipoMovimentacao tipoMovimentacao,
     UUID idInsumo,
-    UUID idUnidadeOrigem,
-    UUID idUnidadeDestino,
+    UUID idUnidade,
+    UUID idTransferencia,
     int quantidade,
     LocalDateTime timestamp
 ) {
