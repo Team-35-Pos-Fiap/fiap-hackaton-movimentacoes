@@ -1,4 +1,4 @@
-package br.com.fiap.movimentacao_service.entities.record.request;
+package br.com.fiap.movimentacao_service.dto.request;
 
 import br.com.fiap.movimentacao_service.entities.enums.TipoMovimentacao;
 import jakarta.validation.Valid;
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;
 
-public record MovimentacaoRecordRequest(
+public record MovimentacaoRequestDto(
     @Valid
     TipoMovimentacao tipoMovimentacao,
     @NotNull

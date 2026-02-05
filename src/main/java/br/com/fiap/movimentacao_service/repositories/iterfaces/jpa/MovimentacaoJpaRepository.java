@@ -4,11 +4,12 @@ import br.com.fiap.movimentacao_service.entities.model.MovimentacaoModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public interface IMovimentacaoJpaRepository extends JpaRepository<MovimentacaoModel, UUID> {
+public interface MovimentacaoJpaRepository extends JpaRepository<MovimentacaoModel, UUID>, JpaSpecificationExecutor<MovimentacaoModel> {
     Page<MovimentacaoModel> findAllByIdUnidade(
         UUID idUnidadeOrigem,
         Pageable pageable

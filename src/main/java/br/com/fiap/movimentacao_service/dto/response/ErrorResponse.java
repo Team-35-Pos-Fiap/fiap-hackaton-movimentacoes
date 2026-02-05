@@ -1,4 +1,4 @@
-package br.com.fiap.movimentacao_service.entities.record.response;
+package br.com.fiap.movimentacao_service.dto.response;
 
 public record ErrorResponse(
     int status,

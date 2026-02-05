@@ -1,9 +1,9 @@
 package br.com.fiap.movimentacao_service.controllers;
 
-import br.com.fiap.movimentacao_service.entities.record.request.MovimentacaoRecordRequest;
-import br.com.fiap.movimentacao_service.entities.record.response.MovimentacaoRecordPaginacaoResponse;
-import br.com.fiap.movimentacao_service.entities.record.response.MovimentacaoRecordResponse;
-import br.com.fiap.movimentacao_service.services.interfaces.IMovimentacaoService;
+import br.com.fiap.movimentacao_service.dto.request.MovimentacaoRequestDto;
+import br.com.fiap.movimentacao_service.dto.response.MovimentacaoPaginacaoResponseDto;
+import br.com.fiap.movimentacao_service.dto.response.MovimentacaoResponseDto;
+import br.com.fiap.movimentacao_service.services.interfaces.MovimentacaoService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +18,15 @@ import java.util.UUID;
 @Slf4j
 public class MovimentacaoController {
 
-    IMovimentacaoService movimentacaoService;
+    MovimentacaoService movimentacaoService;
 
-    public MovimentacaoController(IMovimentacaoService movimentacaoService) {
+    public MovimentacaoController(MovimentacaoService movimentacaoService) {
         this.movimentacaoService = movimentacaoService;
     }
 
-    @GetMapping("/unidades/{idUnidade}")
-    public ResponseEntity<MovimentacaoRecordPaginacaoResponse> buscarMovimentacoes(
-        @PathVariable UUID idUnidade,
+    @GetMapping
+    public ResponseEntity<MovimentacaoPaginacaoResponseDto> buscarMovimentacoes(
+        @RequestParam(required = false) UUID idUnidade,
         @RequestParam(required = false) UUID idInsumo,
         @RequestParam(required = false) LocalDate dataInicio,
         @RequestParam(required = false) LocalDate dataFim,
@@ -49,7 +49,7 @@ public class MovimentacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<List<MovimentacaoRecordResponse>> movimentacao(@RequestBody @Valid MovimentacaoRecordRequest dadosMovimentacao) {
+    public ResponseEntity<List<MovimentacaoResponseDto>> movimentacao(@RequestBody @Valid MovimentacaoRequestDto dadosMovimentacao) {
         log.info("movimentacao(): dados da movimentação {}", dadosMovimentacao);
 
         return ResponseEntity.ok().body(movimentacaoService.movimentar(dadosMovimentacao));
