@@ -14,7 +14,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
-EXPOSE 8085
+EXPOSE 8082
 
 COPY --from=builder /app/target/*.jar movimentacao-service.jar
 ENTRYPOINT ["java", "-jar", "movimentacao-service.jar"]
